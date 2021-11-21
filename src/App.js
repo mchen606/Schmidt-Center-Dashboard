@@ -2,12 +2,14 @@ import './App.css';
 import NavBar from './components/NavBar.js'
 import Home from './pages/Home.js'
 import Map from './pages/Map.js'
+import DashBoard from './pages/DashBoard.js'
+import Reports from './pages/Reports.js'
 import React from 'react';
 
 import {
     BrowserRouter as Router,
     Route,
-    Link,
+    //Link,
     Routes
 } from 'react-router-dom';
 
@@ -19,6 +21,8 @@ export default function App() {
       <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/Map" element={<Map/>}/>
+          <Route path="/DashBoard" element={<DashBoard/>}/>
+          <Route path="/Reports" element={<Reports/>}/>
       </Routes>
       </div>
     </Router>
