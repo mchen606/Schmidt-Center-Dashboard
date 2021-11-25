@@ -1,0 +1,21 @@
+#No-Data {
+  background-color: rgb(150, 150, 150);
+}
+#Satisfactory {
+  background-color: rgb(104, 225, 67);
+}
+#LevelTwo {
+  background-color: rgb(255, 255, 00);
+}
+#LevelThree {
+  background-color: rgb(255, 126, 0);
+}
+#LevelFour {
+  background-color: rgb(255, 0, 0);
+}
+#Health-Alert {
+  background-color: rgb(143, 63, 151);
+}
+#Health-Warning {
+  background-color: rgb(126, 0, 35);
+}
