@@ -4,25 +4,25 @@ const features = [
   {
     name: 'Connected to the Purple Air Network',
     description:
-      'Our project displays the air quality within PG County, geared towards students and faculty alike.',
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
     icon: GlobeAltIcon,
   },
   {
     name: 'Compare Locations',
     description:
-      'This website will have the ability to compare and contrast different regions in the county.',
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
     icon: ScaleIcon,
   },
   {
     name: 'Live Air Quality Data',
     description:
-      'Our site utilizes the data found from https://map.purpleair.com/ , updated in real time for transparent use.',
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
     icon: LightningBoltIcon,
   },
   {
     name: 'Mobile notifications',
     description:
-      'This runs for both desktop and mobile applications!',
+      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
     icon: AnnotationIcon,
   },
 ]
