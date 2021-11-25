@@ -4,25 +4,25 @@ const features = [
   {
     name: 'Connected to the Purple Air Network',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Our project displays the air quality within PG County, geared towards students and faculty alike.',
     icon: GlobeAltIcon,
   },
   {
     name: 'Compare Locations',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'This website will have the ability to compare and contrast different regions in the county.',
     icon: ScaleIcon,
   },
   {
     name: 'Live Air Quality Data',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Our site utilizes the data found from https://map.purpleair.com/ , updated in real time for transparent use.',
     icon: LightningBoltIcon,
   },
   {
     name: 'Mobile notifications',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'This runs for both desktop and mobile applications!',
     icon: AnnotationIcon,
   },
 ]
@@ -39,8 +39,7 @@ function Home() {
             Schmidt Center Dashboard
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-            accusamus quisquam.
+            Schmidt Center Dashboard currently being developed by Shiv Patel, Antoine Vignon, Arko Mazumder, and Theodore Tasker.
           </p>
         </div>
 
