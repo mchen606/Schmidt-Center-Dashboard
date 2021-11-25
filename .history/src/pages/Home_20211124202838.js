@@ -39,7 +39,8 @@ function Home() {
             Schmidt Center Dashboard
           </p>
           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            Schmidt Center Dashboard currently being developed by Shiv Patel, Antoine Vignon, Arko Mazumder, and Theodore Tasker.
+            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
+            accusamus quisquam.
           </p>
         </div>
 
