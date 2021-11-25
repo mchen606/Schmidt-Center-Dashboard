@@ -1,4 +1,4 @@
-var sensors_controller = require('../handlers/listOfSensorsIDs');
+var sensors_controller = require('../../handlers/listOfSensorsIDs');
 
 /* GET home page. */
 exports.handler = async function (event, context) {
