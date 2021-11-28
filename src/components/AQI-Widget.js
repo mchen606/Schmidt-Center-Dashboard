@@ -44,14 +44,14 @@ function AQIWidget() {
             </h2>
           </div>
           <div className='flex'>
-           <div className='py-4 font-medium'>0</div>
+           <div className='py-1 font-medium'>0</div>
             <div>
               <img
                 src='/arrow.jpg'
                 alt='Double Sided Arrow' 
               />
             </div>
-            <div className='py-4 font-medium'>50</div>
+            <div className='py-1 font-medium'>50</div>
           </div>
         </div>
       </>

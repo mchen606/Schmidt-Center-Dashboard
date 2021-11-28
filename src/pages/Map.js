@@ -16,8 +16,8 @@ function Map() {
             <MapView />
           </div>
           {/* Filters Column */}
-          <div className='flex-col px-7'>
-            <div>
+          <div className='flex-col px-7 w-1/4'>
+            <div className='py-4'>
               <AQIWidget />
             </div>
             <div>
