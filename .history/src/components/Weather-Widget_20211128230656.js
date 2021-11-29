@@ -27,7 +27,8 @@ function WeatherWidget() {
         return <div>Loading...</div>;
       } else {
     return (
-      <div class="box-border md:box-content ...">
+        <div>
+          <div class = "box-border h-45 w-60 p-4 border-4 border-light-blue-500 border-opacity-100 ...">
           <div class="shadow-lg bg-white rounded-lg h-18">
             <h2>Prince George's County, MD</h2>
             <div>
@@ -38,6 +39,7 @@ function WeatherWidget() {
               <p>Humidity: {resObj.main.humidity}%</p>
             </div>
         </div> 
+        </div>
         </div>
     )}
 }

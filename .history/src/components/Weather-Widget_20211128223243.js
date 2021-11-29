@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../index.css'
+import './index.css'
 
 function WeatherWidget() {
     const [error, setError] = useState(null);
@@ -27,8 +27,7 @@ function WeatherWidget() {
         return <div>Loading...</div>;
       } else {
     return (
-      <div class="box-border md:box-content ...">
-          <div class="shadow-lg bg-white rounded-lg h-18">
+        <div>
             <h2>Prince George's County, MD</h2>
             <div>
                {console.log(JSON.stringify(resObj))}
@@ -38,7 +37,6 @@ function WeatherWidget() {
               <p>Humidity: {resObj.main.humidity}%</p>
             </div>
         </div> 
-        </div>
     )}
 }
 
