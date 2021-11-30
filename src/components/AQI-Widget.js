@@ -33,23 +33,21 @@ function AQIWidget() {
       <>
         <div className='flex-col'>
           <div>
-            <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{items.field2}</p>
+            <p className='text-2xl text-gray-600'>
+              <span className='font-bold'>County AQI: </span>
+              {items.field2}
+            </p>
           </div>
           <div
             className='mt-3 py-4 rounded-md text-center'
             id={aqiGradeRGB(items.field2)}
           >
-            <h2>
-              <stong>{aqiGradeRGB(items.field2)}</stong>
-            </h2>
+            <h2>{aqiGradeRGB(items.field2)}</h2>
           </div>
           <div className='flex'>
-           <div className='py-4 font-medium'>0</div>
+            <div className='py-4 font-medium'>0</div>
             <div>
-              <img
-                src='/arrow.jpg'
-                alt='Double Sided Arrow' 
-              />
+              <img src='/arrow.jpg' alt='Double Sided Arrow' />
             </div>
             <div className='py-4 font-medium'>50</div>
           </div>

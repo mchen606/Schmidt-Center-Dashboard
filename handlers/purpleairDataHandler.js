@@ -60,15 +60,14 @@ from the purpleair api call and the list of sensor ids.
 The stats variable from the Json result holds all the 
 sensors measurements */
 const processedData = (inputData, sensor_IDs) => {
-  let dataList = [];
+  const processedData = {};
   sensor_IDs.forEach((sensor_ID) => {
-    const results = inputData.results.find((read) => read.ID === sensor_ID);
+    let results = inputData.results.find((read) => read.ID === sensor_ID);
     if (results !== undefined) {
       let stats = JSON.parse(results['Stats']);
       let calculatedAQI = AQICalculator.aqiFromPM(parseFloat(stats['v5']));
 
-      dataList.push({
-        sensor_ID: sensor_ID,
+      processedData[sensor_ID] = {
         Primary_Channel_ID: results['THINGSPEAK_PRIMARY_ID'],
         Primary_KEY: results['THINGSPEAK_PRIMARY_ID_READ_KEY'],
         Secondary_Channel_ID: results['THINGSPEAK_SECONDARY_ID'],
@@ -81,12 +80,12 @@ const processedData = (inputData, sensor_IDs) => {
         AQI: calculatedAQI,
         AQIDescription: AQICalculator.getAQIDescription(calculatedAQI),
         AQIMessage: AQICalculator.getAQIMessage(calculatedAQI)
-      });
+      };
     } else {
       console.log('could not find sensor data for ID', sensor_ID);
     }
   });
-  return dataList;
+  return processedData;
 };
 
 /**
