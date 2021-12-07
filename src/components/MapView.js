@@ -51,6 +51,7 @@ function MapView() {
         data = await data.json();
         console.log('DATA: ', data);
         await setSensorData({
+          allSensors: await data.schmidtSensorsData,
           north: await data.northCountySensorData,
           central: await data.centralCountySensorsData,
           inner: await data.innerBeltwaySensorsData,
