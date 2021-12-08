@@ -13,8 +13,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import faker from 'faker';
-import { render } from "react-dom";
+// import faker from 'faker';
+// import { render } from "react-dom";
 
 var thingspeakHandler = require('./dataHandler');
 
@@ -50,7 +50,7 @@ export async function chartData(inputs){
             aqi_descriptions.push(feed.AQIDescription);
         });
 
-        console.log("Temperatures:" + temperatures)
+        console.log("AQI:" + aqis)
         
     });
     
