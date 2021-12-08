@@ -23,11 +23,11 @@ export function HandleInputForm() {
         }));
     }
     
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         alert('This was submitted: ' + inputs.sensorid + " " + inputs.startdate);
         const rootElement = document.getElementById("chart-display");
-        const Display = () => displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
+        const Display = () => displayChart.ShowChart(inputs.sensorid, inputs.startdate, inputs.enddate);
         render(<Display />, rootElement);
         //displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
         //getRequestedData(inputs.sensorid, inputs.startdate, inputs.enddate);
