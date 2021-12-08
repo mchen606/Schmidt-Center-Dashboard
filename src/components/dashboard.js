@@ -78,9 +78,6 @@ export function HandleInputForm() {
                 </div>
               </form>
           </div>
-          <div className="result-display" id="result-display">
-            <canvas id="canvas" ref={canvasRef} width="250" height="250"></canvas>
-          </div>
           <div className="chart-display" id="chart-display">
               
           </div>
