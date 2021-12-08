@@ -32,6 +32,7 @@ function MapView() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [sensors, setSensorData] = useState({
+    allSensors: null,
     north: null,
     central: null,
     inner: null,
@@ -49,18 +50,16 @@ function MapView() {
       try {
         let data = await fetch('/.netlify/functions/processed');
         data = await data.json();
-        console.log('DATA: ', data);
-        await setSensorData({
-          allSensors: await data.schmidtSensorsData,
-          north: await data.northCountySensorData,
-          central: await data.centralCountySensorsData,
-          inner: await data.innerBeltwaySensorsData,
-          south: await data.southCountySensorsData,
-          rural: await data.ruralTierSensorsDatas
+        setSensorData({
+          allSensors: data.schmidtSensorsData,
+          north: data.northCountySensorsData,
+          central: data.centralCountySensorsData,
+          inner: data.innerBeltwaySensorsData,
+          south: data.southCountySensorsData,
+          rural: data.ruralTierSensorsData
         });
         setIsLoaded(true);
       } catch (err) {
-        console.log('Hit1: ', err);
         setError(true);
       }
     };
@@ -71,7 +70,7 @@ function MapView() {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    console.log('Sensors: ', sensors);
+    console.log('Sensors', sensors);
     return (
       <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
         <TileLayer

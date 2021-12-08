@@ -34,7 +34,6 @@ const rawData = async () => {
     })
       .then((fromServer) => fromServer.json())
       .then((jsonFromServer) => {
-        console.log(jsonFromServer);
         if (jsonFromServer.code) {
           if (jsonFromServer.code !== 200) {
             throw new Error(jsonFromServer.message);
@@ -110,7 +109,6 @@ const updateSensorData = async () => {
   try {
     const serverJson = await rawData();
     const sensorData = serverJson.data;
-    console.log('inside updater', sensorData);
     allSensorsData = processedData(sensorData, allSensors);
     northSensorsData = processedData(sensorData, northCountySensors);
     centralSensorData = processedData(sensorData, CentralCounty);
