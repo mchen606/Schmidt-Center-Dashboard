@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import MyForm from '../components/drawCanvas';
+import HandleInputForm from '../components/dashboard';
 //import DisplayOnSubmit from '../helpers/drawCanvas.js';
 function DashBoard() {
   return (
@@ -19,7 +19,7 @@ function DashBoard() {
             </div>
             {/* /End replace */}
           </div>
-          <MyForm />
+          <HandleInputForm />
         </main>
     </>
   )

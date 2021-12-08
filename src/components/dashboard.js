@@ -1,85 +1,37 @@
 
 import { useRef } from "react";
 import { useState } from "react";
+import { render } from 'react-dom';
 
-var thingspeakHandler = require('./dataHandler');
+const displayChart = require('./displayChart')
 
-//import ReactDOM from "react-dom";
-
-
-async function getRequestedData(sensorids, startdate, enddate, datafield) {
-    
-    console.log("received id:"+ sensorids)
-    const data = await thingspeakHandler.getThingspeakProcessedData([sensorids], startdate, enddate);
-    
-    console.log('DATA: ', data);   
-
-}
-
-function draw(canvasRef) {
-
-
-    console.log("Drawing");
-
-    const canvasObj = canvasRef.current;
-    const ctx = canvasObj.getContext('2d');
-
-    ctx.clearRect(0, 0, 250, 250);
-    
-    ctx.fillStyle = 'rgb(200, 0, 0)';
-    ctx.fillRect(10, 10, 50, 50);
-        
-    ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    ctx.fillRect(30, 30, 50, 50);
-    
-}
-
-// function DisplayCanvasOnSubmit()  {
-
-//     const canvasRef = useRef(null);
-//     const canvasObj = canvasRef.current;
-//     const ctx = canvasObj.getContext('2d');
-
-//     draw(ctx);
-
-//     return (
-//         <canvas id="canvas" ref={canvasRef} width="250" height="250"></canvas>
-//     )
-
-// }
-
-
-function MyhtmlForm() {
+export function HandleInputForm() {
 
     const canvasRef = useRef(null);
     // const canvasObj = canvasRef.current;
     // const ctx = canvasObj.getContext('2d');
+    const [inputs, setInputs] = useState({
+        sensorid: '',
+        startdate: '',
+        enddate: ''
+    });
 
-  const [inputs, setInputs] = useState({
-      sensorid: '',
-      startdate: '',
-      enddate: ''
-  });
-
-//   const handleChange = (event) => {
-//     const name = event.target.name;
-//     const value = event.target.value;
-//     setInputs(values => ({...values, [name]: value}))
-//   }
-
-  const handleChange = e => {
-    setInputs(oldValues => ({
-      ...oldValues,
-      [e.target.name]: e.target.value
-    }));
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert('This was submitted: ' + inputs.sensorid + " " + inputs.startdate);
-    getRequestedData(inputs.sensorid, inputs.startdate, inputs.enddate);
-    draw(canvasRef);
-  }
+    const handleChange = e => {
+        setInputs(oldValues => ({
+            ...oldValues,
+            [e.target.name]: e.target.value
+        }));
+    }
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert('This was submitted: ' + inputs.sensorid + " " + inputs.startdate);
+        const rootElement = document.getElementById("chart-display");
+        const Display = () => displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
+        render(<Display />, rootElement);
+        //displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
+        //getRequestedData(inputs.sensorid, inputs.startdate, inputs.enddate);
+    }
 
   return (
       <div>
@@ -126,13 +78,15 @@ function MyhtmlForm() {
                 </div>
               </form>
           </div>
-          <div className="result-display">
+          <div className="result-display" id="result-display">
             <canvas id="canvas" ref={canvasRef} width="250" height="250"></canvas>
+          </div>
+          <div className="chart-display" id="chart-display">
+              
           </div>
       </div>
 
   )
 }
 
-
-export default MyhtmlForm;
+export default HandleInputForm;
