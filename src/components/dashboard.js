@@ -117,8 +117,8 @@ export function HandleInputForm() {
           <div className='user-input'>
             <input
               type='checkbox'
-              id='AQI'
-              name='AQI'
+              id='aqi'
+              name='aqi'
               value={inputs.aqi}
               onChange={handleCheckboxChange}
             ></input>
