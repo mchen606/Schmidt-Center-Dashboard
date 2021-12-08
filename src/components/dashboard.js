@@ -13,7 +13,13 @@ export function HandleInputForm() {
     const [inputs, setInputs] = useState({
         sensorid: '',
         startdate: '',
-        enddate: ''
+        enddate: '',
+        temperature: false,
+        aqi: false,
+        humidity: false,
+        pm_1: false,
+        pm_25: false,
+        pm_10: false
     });
 
     const handleChange = e => {
@@ -22,12 +28,19 @@ export function HandleInputForm() {
             [e.target.name]: e.target.value
         }));
     }
+
+    const handleCheckboxChange = e => {
+        setInputs(oldValues => ({
+            ...oldValues,
+            [e.target.name]: e.target.checked
+        }));
+    }
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        alert('This was submitted: ' + inputs.sensorid + " " + inputs.startdate);
+        alert('This was submitted: ' + JSON.stringify(inputs));
         const rootElement = document.getElementById("chart-display");
-        const Display = () => displayChart.ShowChart(inputs.sensorid, inputs.startdate, inputs.enddate);
+        const Display = () => displayChart.ShowChart(inputs);
         render(<Display />, rootElement);
         //displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
         //getRequestedData(inputs.sensorid, inputs.startdate, inputs.enddate);
@@ -37,7 +50,7 @@ export function HandleInputForm() {
       <div>
           <div>
               <form onSubmit={handleSubmit} class="user-inputs" method="post" name="user-input">
-                <p>Enter desired sensor id and date range:</p>
+                <h2><b>Enter sensor ID and date range:</b></h2>
                 <div class="user-input">
                     <label htmlFor="sensor-id"> Sensor ID: </label>
                     <input type="number" id="sensor-id" name="sensorid" placeholder="Sensor ID"
@@ -59,20 +72,49 @@ export function HandleInputForm() {
                         onChange={handleChange} required>
                     </input>
                 </div>
-                <p>Choose a feature to compare:</p>
+                <h2><b>Choose a feature to compare:</b></h2>
+                <p>(Default: Temperature and AQI)</p>
                 <div class="user-input">
-                    <input type="checkbox" id="temperature" name="temperature"></input>
+                    <input type="checkbox" id="temperature" name="temperature"
+                        value={inputs.temperature}
+                        onChange={handleCheckboxChange}
+                    >
+                    </input>
                     <label htmlFor="temperature">Temperature</label>
                 </div>
                 <div class="user-input">
-                    <input type="checkbox" id="AQI" name="AQI"></input>
-                    <label htmlFor="AQI">AQI</label>
+                    <input type="checkbox" id="humidity" name="humidity"
+                        value={inputs.humidity}
+                        onChange={handleCheckboxChange}>
+                    </input>
+                    <label htmlFor="humidity">Humidity</label>
                 </div>
                 <div class="user-input">
-                    <input type="checkbox" id="pm_25" name="pm_25"></input>
-                    <label htmlFor="pm_25">PM_2.5</label>
+                    <input type="checkbox" id="AQI" name="AQI"
+                        value={inputs.aqi}
+                        onChange={handleCheckboxChange}>
+                    </input>
+                    <label htmlFor="AQI">AQI (Air Quality Index)</label>
                 </div>
-                <p>Submit to see result</p>
+                <div class="user-input">
+                    <input type="checkbox" id="pm_1" name="pm_1"
+                        value={inputs.pm_1}
+                        onChange={handleCheckboxChange}></input>
+                    <label htmlFor="pm_1_0">PM_1.0 (Atmospheric Particulate Matter: 1.0 micrometers or less)</label>
+                </div>
+                <div class="user-input">
+                    <input type="checkbox" id="pm_25" name="pm_25"
+                        value={inputs.pm_25}
+                        onChange={handleCheckboxChange}></input>
+                    <label htmlFor="pm_2_5">PM_2.5 (Atmospheric Particulate Matter: 2.5 micrometers or less)</label>
+                </div>
+                <div class="user-input">
+                    <input type="checkbox" id="pm_10" name="pm_10"
+                        value={inputs.pm_10}
+                        onChange={handleCheckboxChange}></input>
+                    <label htmlFor="pm_10_0">PM_10.0 (Atmospheric Particulate Matter: 10 micrometers or less)</label>
+                </div>
+                
                 <div class="user-input">
                     <input type="submit" value="Submit" id="submit"></input>
                 </div>
