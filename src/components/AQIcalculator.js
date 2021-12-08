@@ -22,10 +22,10 @@ var AQIMessage = getAQIMessage(AQI); // What the provided AQI means (a longer de
 
 
 // Air quality Index from PM2.5 Measurements
-exports.aqiFromPM = function(pm) 
+export function aqiFromPM(pm) 
 {
     if (isNaN(pm)) return "-";
-    if (pm == undefined) return "-";
+    if (pm === undefined) return "-";
     if (pm < 0) return pm;
     if (pm > 1000) return "-";
     /*      
@@ -60,7 +60,7 @@ exports.aqiFromPM = function(pm)
 function aqiFromOzone(ozone) 
 {
     if (isNaN(ozone)) return "-";
-    if (ozone == undefined) return "-";
+    if (ozone === undefined) return "-";
     if (ozone < 0) return ozone;
     if (ozone > 1000) return "-";
     /*      
@@ -91,7 +91,7 @@ function aqiFromOzone(ozone)
 function bplFromPM(pm) 
 {
     if (isNaN(pm)) return 0;
-    if (pm == undefined) return 0;
+    if (pm === undefined) return 0;
     if (pm < 0) return 0;
     /*      
           Good                              0 - 50         0.0 - 15.0         0.0 – 12.0
@@ -126,7 +126,7 @@ function bphFromPM(pm)
 {
     //return 0;
     if (isNaN(pm)) return 0;
-    if (pm == undefined) return 0;
+    if (pm === undefined) return 0;
     if (pm < 0) return 0;
     /*      
           Good                              0 - 50         0.0 - 15.0         0.0 – 12.0
@@ -166,7 +166,7 @@ function calcAQI(Cp, Ih, Il, BPh, BPl)
 }
   
   
-exports.getAQIDescription = function(aqi) 
+export function getAQIDescription(aqi) 
 {
     if (aqi >= 401) {
       return 'Hazardous';
@@ -188,7 +188,7 @@ exports.getAQIDescription = function(aqi)
 }
   
   
-exports.getAQIMessage = function(aqi) 
+export function getAQIMessage(aqi) 
 {
     if (aqi >= 401) {
       return '>401: Health alert: everyone may experience more serious health effects';
