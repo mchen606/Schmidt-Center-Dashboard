@@ -33,7 +33,7 @@ const innerBeltsway = [
     53677,  // CheverlyAQM_W1_1 (outside)
     53663,  // CheverlyAQM_W1_3 (outside)
     53775,  // CheverlyAQM_W2_2 (outside)
-    54259   // CheverlyAQM_W2_3 (outside)
+   // 54259   // CheverlyAQM_W2_3 (outside)
 ];
 
 // Central County: 38.8275,-76.751111
