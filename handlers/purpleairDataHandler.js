@@ -66,12 +66,7 @@ const processedData = (inputData, sensor_IDs) => {
       let stats = JSON.parse(results['Stats']);
       let calculatedAQI = AQICalculator.aqiFromPM(parseFloat(stats['v5']));
 
-<<<<<<< HEAD
-      processedData.push({
-        sensor_ID: sensor_ID,
-=======
       processedData[sensor_ID] = {
->>>>>>> parent of 85feda3 (changed processed object to be an array to allow for future iteration)
         Primary_Channel_ID: results['THINGSPEAK_PRIMARY_ID'],
         Primary_KEY: results['THINGSPEAK_PRIMARY_ID_READ_KEY'],
         Secondary_Channel_ID: results['THINGSPEAK_SECONDARY_ID'],
@@ -84,11 +79,7 @@ const processedData = (inputData, sensor_IDs) => {
         AQI: calculatedAQI,
         AQIDescription: AQICalculator.getAQIDescription(calculatedAQI),
         AQIMessage: AQICalculator.getAQIMessage(calculatedAQI)
-<<<<<<< HEAD
-      });
-=======
       };
->>>>>>> parent of 85feda3 (changed processed object to be an array to allow for future iteration)
     } else {
       console.log('could not find sensor data for ID', sensor_ID);
     }
