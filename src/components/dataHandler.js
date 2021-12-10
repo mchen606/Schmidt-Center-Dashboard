@@ -64,9 +64,9 @@ const getMultipleSensorData = async(sensor_IDs, start_date, end_date) =>
         // Retreive updated sensor data from purpleair
         let purpleairData = await fetch('/.netlify/functions/processed');
         purpleairData = await purpleairData.json();
-        console.log("Data boom bbom", purpleairData);
+        //console.log("Data boom bbom", purpleairData);
         const purpleairSchmidtSensorsData = await purpleairData.schmidtSensorsData;
-        console.log("Data:", purpleairSchmidtSensorsData);
+        //console.log("Data:", purpleairSchmidtSensorsData);
  
         for(let sensor_ID of sensor_IDs) {
             // Get sensor data from purpleair
