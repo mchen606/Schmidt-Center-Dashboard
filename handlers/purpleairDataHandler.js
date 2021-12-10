@@ -59,15 +59,19 @@ from the purpleair api call and the list of sensor ids.
 The stats variable from the Json result holds all the 
 sensors measurements */
 const processedData = (inputData, sensor_IDs) => {
-  const processedData = [];
+  const processedData = {};
   sensor_IDs.forEach((sensor_ID) => {
     let results = inputData.results.find((read) => read.ID === sensor_ID);
     if (results !== undefined) {
       let stats = JSON.parse(results['Stats']);
       let calculatedAQI = AQICalculator.aqiFromPM(parseFloat(stats['v5']));
 
+<<<<<<< HEAD
       processedData.push({
         sensor_ID: sensor_ID,
+=======
+      processedData[sensor_ID] = {
+>>>>>>> parent of 85feda3 (changed processed object to be an array to allow for future iteration)
         Primary_Channel_ID: results['THINGSPEAK_PRIMARY_ID'],
         Primary_KEY: results['THINGSPEAK_PRIMARY_ID_READ_KEY'],
         Secondary_Channel_ID: results['THINGSPEAK_SECONDARY_ID'],
@@ -80,7 +84,11 @@ const processedData = (inputData, sensor_IDs) => {
         AQI: calculatedAQI,
         AQIDescription: AQICalculator.getAQIDescription(calculatedAQI),
         AQIMessage: AQICalculator.getAQIMessage(calculatedAQI)
+<<<<<<< HEAD
       });
+=======
+      };
+>>>>>>> parent of 85feda3 (changed processed object to be an array to allow for future iteration)
     } else {
       console.log('could not find sensor data for ID', sensor_ID);
     }
@@ -100,12 +108,12 @@ const updateSensorData = async () => {
   const southCountySensors = sensorsList.getSouthCountySensorsIds(); //getSouthCountySensors();
   const allSensors = sensorsList.getSensorsIDs();
 
-  let allSensorsData = [];
-  let northSensorsData = [];
-  let centralSensorData = [];
-  let ruralSensorsData = [];
-  let innerBeltwayData = [];
-  let southSensorData = [];
+  let allSensorsData = {};
+  let northSensorsData = {};
+  let centralSensorData = {};
+  let ruralSensorsData = {};
+  let innerBeltwayData = {};
+  let southSensorData = {};
 
   try {
     const serverJson = await rawData();
