@@ -82,7 +82,7 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center'
+              className='container mx-auto p-3 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
@@ -103,7 +103,7 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center'
+              className='container mx-auto p-3 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
@@ -124,7 +124,7 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center'
+              className='container mx-auto p-3 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
@@ -145,7 +145,7 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center'
+              className='container mx-auto p-3 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
@@ -165,7 +165,7 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center'
+              className='container mx-auto p-3 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
