@@ -9,8 +9,45 @@ import {
 import aqiGradeRGB from '../helpers/AQI';
 
 import React, { useState, useEffect } from 'react';
+//import { data } from './displayChart';
 
 //https://api.thingspeak.com/channels/1344510/feeds.json?api_key=VJ570KKB1RMDD6NU
+
+function showLabelMap(sensorData) {
+  const dataArray = [];
+  for (const sensorKey in sensorData) {
+    if (sensorData.hasOwnProperty(sensorKey)) {
+      let sensor = sensorData[sensorKey];
+      dataArray.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensorKey}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-2 text-center rounded-md'
+              id={aqiGradeRGB(sensor.AQI)}
+              key={sensorKey}
+            >
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensorKey}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                AQI Description: {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
+            </div>
+          </Popup>
+        </Marker>
+      );
+
+    }
+
+  }
+
+  return dataArray;
+
+}
 
 function MapView() {
   const [error, setError] = useState(null);
@@ -54,131 +91,11 @@ function MapView() {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    const northCountySensorsMarkers = [];
-    for (const sensor of sensors.north) {
-      northCountySensorsMarkers.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensor.sensor_ID}
-        >
-          <Popup>
-            <div
-              className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
-              key={sensor.sensor_ID}
-            >
-              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
-              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
-              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans font-bold p-1'>
-                AQI Description: {sensor.AQIDescription}
-              </h1>
-              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
-    const centralCountySensorsMarkers = [];
-    for (const sensor of sensors.central) {
-      centralCountySensorsMarkers.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensor.sensor_ID}
-        >
-          <Popup>
-            <div
-              className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
-              key={sensor.sensor_ID}
-            >
-              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
-              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
-              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans font-bold p-1'>
-                AQI Description: {sensor.AQIDescription}
-              </h1>
-              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
-    const innerBeltwaySensorsMarkers = [];
-    for (const sensor of sensors.inner) {
-      innerBeltwaySensorsMarkers.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensor.sensor_ID}
-        >
-          <Popup>
-            <div
-              className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
-              key={sensor.sensor_ID}
-            >
-              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
-              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
-              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans font-bold p-1'>
-                AQI Description: {sensor.AQIDescription}
-              </h1>
-              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
-    const southCountySensorsMarkers = [];
-    for (const sensor of sensors.south) {
-      southCountySensorsMarkers.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensor.sensor_ID}
-        >
-          <Popup>
-            <div
-              className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
-              key={sensor.sensor_ID}
-            >
-              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
-              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
-              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans font-bold p-1'>
-                AQI Description: {sensor.AQIDescription}
-              </h1>
-              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
-    const ruralTierSensorsMarkers = [];
-    for (const sensor of sensors.rural) {
-      ruralTierSensorsMarkers.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensor.sensor_ID}
-        >
-          <Popup>
-            <div
-              className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
-              key={sensor.sensor_ID}
-            >
-              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
-              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
-              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans font-bold p-1'>
-                AQI Description: {sensor.AQIDescription}
-              </h1>
-              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
-            </div>
-          </Popup>
-        </Marker>
-      );
-    }
+    const northCountySensorsMarkers = [...showLabelMap(sensors.north)];
+    const centralCountySensorsMarkers = [...showLabelMap(sensors.central)];
+    const innerBeltwaySensorsMarkers = [...showLabelMap(sensors.inner)];
+    const southCountySensorsMarkers = [...showLabelMap(sensors.south)];
+    const ruralTierSensorsMarkers = [...showLabelMap(sensors.rural)];
     return (
       <MapContainer center={center} zoom={10} scrollWheelZoom={true}>
         <TileLayer
