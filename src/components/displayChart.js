@@ -50,7 +50,7 @@ export async function chartData(inputs){
             aqi_descriptions.push(feed.AQIDescription);
         });
 
-        console.log("AQI:" + aqis)
+        console.log("Humidities" + humidities)
         
     });
     
