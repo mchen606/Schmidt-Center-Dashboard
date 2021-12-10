@@ -12,24 +12,6 @@ import aqiGradeRGB from '../helpers/AQI';
 import React, { useState, useEffect } from 'react';
 
 //https://api.thingspeak.com/channels/1344510/feeds.json?api_key=VJ570KKB1RMDD6NU
-function LocationMarker() {
-  const [position, setPosition] = useState(null);
-  const map = useMapEvents({
-    click() {
-      map.locate();
-    },
-    locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, map.getZoom());
-    }
-  });
-
-  return position === null ? null : (
-    <Marker position={position}>
-      <Popup>You are here</Popup>
-    </Marker>
-  );
-}
 
 function MapView() {
   const [error, setError] = useState(null);
@@ -82,13 +64,16 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center rounded-md'
+              className='container mx-auto p-2 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
           </Popup>
         </Marker>
@@ -103,13 +88,16 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center rounded-md'
+              className='container mx-auto p-2 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
-              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
           </Popup>
         </Marker>
@@ -124,13 +112,16 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center rounded-md'
+              className='container mx-auto p-2 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
           </Popup>
         </Marker>
@@ -145,12 +136,16 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center rounded-md'
+              className='container mx-auto p-2 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
+              key={sensor.sensor_ID}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
           </Popup>
         </Marker>
@@ -165,12 +160,16 @@ function MapView() {
         >
           <Popup>
             <div
-              className='container mx-auto p-3 text-center rounded-md'
+              className='container mx-auto p-2 text-center rounded-md'
               id={aqiGradeRGB(sensor.AQI)}
+              key={sensor.sensor_ID}
             >
               <h1 className='font-sans font-bold '>{sensor.Label}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
-              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+              <h1 className='font-sans font-bold p-1'>
+                {sensor.AQIDescription}
+              </h1>
+              <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
           </Popup>
         </Marker>
@@ -182,7 +181,6 @@ function MapView() {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
-        <LocationMarker />
         <LayersControl position='topright'>
           <LayersControl.Overlay name='North'>
             <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
