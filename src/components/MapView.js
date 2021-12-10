@@ -24,7 +24,7 @@ function MapView() {
     south: null,
     rural: null
   });
-  const center = [38.63, -76.75];
+  const center = [38.906334, -76.882176];
   // const centralCounty = [38.8275, -76.751111];
   // const northCounty = [39.019989, -76.879418];
   // const innerBeltway = [38.85944, -76.889167];
@@ -68,10 +68,11 @@ function MapView() {
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
-              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
               <h1 className='font-sans font-bold p-1'>
-                {sensor.AQIDescription}
+                AQI Description: {sensor.AQIDescription}
               </h1>
               <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
@@ -92,10 +93,11 @@ function MapView() {
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
-              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
               <h1 className='font-sans font-bold p-1'>
-                {sensor.AQIDescription}
+                AQI Description: {sensor.AQIDescription}
               </h1>
               <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
@@ -116,10 +118,11 @@ function MapView() {
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
-              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
               <h1 className='font-sans font-bold p-1'>
-                {sensor.AQIDescription}
+                AQI Description: {sensor.AQIDescription}
               </h1>
               <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
@@ -140,10 +143,11 @@ function MapView() {
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
-              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
               <h1 className='font-sans font-bold p-1'>
-                {sensor.AQIDescription}
+                AQI Description: {sensor.AQIDescription}
               </h1>
               <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
@@ -164,10 +168,11 @@ function MapView() {
               id={aqiGradeRGB(sensor.AQI)}
               key={sensor.sensor_ID}
             >
-              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
+              <h1 className='font-sans font-bold '>Sensor ID: {sensor.sensor_ID}</h1>
               <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
               <h1 className='font-sans font-bold p-1'>
-                {sensor.AQIDescription}
+                AQI Description: {sensor.AQIDescription}
               </h1>
               <p className='font-sans p-1'>{sensor.AQIMessage}</p>
             </div>
@@ -176,25 +181,25 @@ function MapView() {
       );
     }
     return (
-      <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
+      <MapContainer center={center} zoom={10} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
         <LayersControl position='topright'>
-          <LayersControl.Overlay name='North'>
+          <LayersControl.Overlay checked name='North'>
             <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
-          <LayersControl.Overlay name='Central'>
+          <LayersControl.Overlay checked name='Central'>
             <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
-          <LayersControl.Overlay name='Rural'>
+          <LayersControl.Overlay checked name='Rural'>
             <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
-          <LayersControl.Overlay name='Inner'>
+          <LayersControl.Overlay checked name='Inner'>
             <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
-          <LayersControl.Overlay name='South'>
+          <LayersControl.Overlay checked name='South'>
             <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
         </LayersControl>
