@@ -4,8 +4,11 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  LayersControl
+  LayersControl,
+  FeatureGroup
 } from 'react-leaflet';
+import aqiGradeRGB from '../helpers/AQI';
+
 import React, { useState, useEffect } from 'react';
 
 //https://api.thingspeak.com/channels/1344510/feeds.json?api_key=VJ570KKB1RMDD6NU
@@ -70,7 +73,109 @@ function MapView() {
   } else if (!isLoaded) {
     return <div>Loading...</div>;
   } else {
-    console.log('Sensors', sensors);
+    const northCountySensorsMarkers = [];
+    for (const sensor of sensors.north) {
+      northCountySensorsMarkers.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensor.sensor_ID}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-3 text-center'
+              id={aqiGradeRGB(sensor.AQI)}
+              key={sensor.sensor_ID}
+            >
+              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    const centralCountySensorsMarkers = [];
+    for (const sensor of sensors.central) {
+      centralCountySensorsMarkers.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensor.sensor_ID}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-3 text-center'
+              id={aqiGradeRGB(sensor.AQI)}
+              key={sensor.sensor_ID}
+            >
+              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    const innerBeltwaySensorsMarkers = [];
+    for (const sensor of sensors.inner) {
+      innerBeltwaySensorsMarkers.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensor.sensor_ID}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-3 text-center'
+              id={aqiGradeRGB(sensor.AQI)}
+              key={sensor.sensor_ID}
+            >
+              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    const southCountySensorsMarkers = [];
+    for (const sensor of sensors.south) {
+      southCountySensorsMarkers.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensor.sensor_ID}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-3 text-center'
+              id={aqiGradeRGB(sensor.AQI)}
+            >
+              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    const ruralTierSensorsMarkers = [];
+    for (const sensor of sensors.rural) {
+      ruralTierSensorsMarkers.push(
+        <Marker
+          position={[sensor.Latitude, sensor.Longitude]}
+          key={sensor.sensor_ID}
+        >
+          <Popup>
+            <div
+              className='container mx-auto p-3 text-center'
+              id={aqiGradeRGB(sensor.AQI)}
+            >
+              <h1 className='font-sans font-bold '>{sensor.Label}</h1>
+              <h1 className='font-sans font-bold'>AQI: {sensor.AQI}</h1>
+              <h1 className='font-sans p-1'>{sensor.AQIDescription}</h1>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
     return (
       <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
         <TileLayer
@@ -80,51 +185,19 @@ function MapView() {
         <LocationMarker />
         <LayersControl position='topright'>
           <LayersControl.Overlay name='North'>
-            <Marker position={center}>
-              <Popup>
-                <div class='container mx-auto bg '>
-                  <h1>North County</h1>
-                  {/* <h2>AQI: {items.field2}</h2>
-                  <h2>Temperature: {items.field6}F</h2> */}
-                </div>
-              </Popup>
-            </Marker>
+            <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
           <LayersControl.Overlay name='Central'>
-            <Marker position={center}>
-              <Popup>
-                <div class='container mx-auto bg '>
-                  <h1>Central County</h1>
-                </div>
-              </Popup>
-            </Marker>
+            <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
           <LayersControl.Overlay name='Rural'>
-            <Marker position={center}>
-              <Popup>
-                <div class='container mx-auto bg '>
-                  <h1>Rural</h1>
-                </div>
-              </Popup>
-            </Marker>
+            <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
           <LayersControl.Overlay name='Inner'>
-            <Marker position={center}>
-              <Popup>
-                <div class='container mx-auto bg '>
-                  <h1>Inner Beltway</h1>
-                </div>
-              </Popup>
-            </Marker>
+            <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
           <LayersControl.Overlay name='South'>
-            <Marker position={center}>
-              <Popup>
-                <div class='container mx-auto bg '>
-                  <h1>South County</h1>
-                </div>
-              </Popup>
-            </Marker>
+            <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
           </LayersControl.Overlay>
         </LayersControl>
       </MapContainer>
