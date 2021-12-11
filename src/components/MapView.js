@@ -3,6 +3,7 @@ import {
   TileLayer,
   Marker,
   Popup,
+  useMapEvents,
   LayersControl,
   FeatureGroup
 } from 'react-leaflet';
