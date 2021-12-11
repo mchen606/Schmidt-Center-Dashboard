@@ -80,9 +80,9 @@ function MapView() {
           rural: data.ruralTierSensorsData
         });
         setIsLoaded(true);
-      } catch (err) {
+      } catch (err) { 
         setError(true);
-      }
+      } 
     };
     fetchData1();
   }, []);
