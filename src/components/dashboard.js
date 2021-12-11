@@ -139,7 +139,6 @@ export function HandleInputForm() {
                       Choose fields to compare
                     </legend>
                     <p className='text-gray-500'>
-                      Default: Temperature and AQI)
                     </p>
                     <div className='mt-4 space-y-4'>
                       <div className='flex items-start'>
