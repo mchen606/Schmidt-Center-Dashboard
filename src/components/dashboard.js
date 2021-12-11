@@ -33,7 +33,7 @@ export function HandleInputForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // alert('This was submitted: ' + JSON.stringify(inputs));
+    alert('This was submitted: ' + JSON.stringify(inputs));
     const rootElement = document.getElementById('chart-display');
     const Display = () => displayChart.ShowChart(inputs);
     render(<Display />, rootElement);
@@ -64,52 +64,16 @@ export function HandleInputForm() {
                 <div className='px-4 py-5 bg-white space-y-6 sm:p-6'>
                   <div className='col-span-6 sm:col-span-3'>
                     <div className='user-input'>
-                      <label htmlFor='sensor-id'> Sensor: </label>
-                      <select
-                        name='sensorid'
+                      <label htmlFor='sensor-id'> Sensor ID: </label>
+                      <input
+                        type='number'
                         id='sensor-id'
+                        name='sensorid'
+                        placeholder='Sensor ID'
+                        value={inputs.sensorid}
                         onChange={handleChange}
                         required
-                        value={inputs.sensorid}
-                      >
-                        <optgroup label='North'>
-                          <option value='102898'>
-                            PGCPS_Schmidt_CenterBldg (outside)
-                          </option>
-                          <option value='104786'>
-                            PGCPS_Schmidt_Orme (outside)
-                          </option>
-                          <option value='102830'>
-                            PGCPS_LargoIntl_Rm125 (outside)
-                          </option>
-                          <option value='102890'>PGCPS_GwynnPHS_Temp3</option>
-                          <option value='131815'>Riverdale Park</option>
-                        </optgroup>
-                        <optgroup label='Central'></optgroup>
-                        <optgroup label='Rural'></optgroup>
-                        <optgroup label='Inner'>
-                          <option value='114799'>Cheverly (outside)</option>
-                          <option value='57841'>
-                            CheverlyAQM_W3_1 (outside)
-                          </option>
-                          <option value='52833'>
-                            CheverlyAQM_W1_2 (outside)
-                          </option>
-                          <option value='53677'>
-                            CheverlyAQM_W1_1 (outside)
-                          </option>
-                          <option value='53663'>
-                            CheverlyAQM_W1_3 (outside)
-                          </option>
-                          <option value='53775'>
-                            CheverlyAQM_W2_2 (outside)
-                          </option>
-                          <option value='54259'>
-                            CheverlyAQM_W2_3 (outside)
-                          </option>
-                        </optgroup>
-                        <optgroup label='South'></optgroup>
-                      </select>
+                      />
                     </div>
                     <div className='user-input'>
                       <label htmlFor='start-date'> Start Date: </label>
@@ -169,16 +133,16 @@ export function HandleInputForm() {
                         <div className='flex items-center h-5'>
                           <input
                             type='checkbox'
-                            id='humidity'
-                            name='humidity'
-                            value={inputs.humidity}
+                            id='aqi'
+                            name='aqi'
+                            value={inputs.aqi}
                             onChange={handleCheckboxChange}
                             className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
                           />
                         </div>
                         <div className='ml-3 text-sm'>
                           <label
-                            htmlFor='humidity'
+                            htmlFor='aqi'
                             className='font-medium text-gray-700'
                           >
                             Humidity
