@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom';
 
 export default function App() {
+  document.title = 'Schmidt Center Dashboard'
   return (
     <Router>
       <div className='min-h-full'>
