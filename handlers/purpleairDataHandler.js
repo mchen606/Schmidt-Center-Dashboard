@@ -162,6 +162,7 @@ exports.getUpdatedsouthCountySensorsData = async function () {
   return (await updateSensorData()).southCountySensorsData;
 };
 
+
 // For testing
 // async function logData()
 // {

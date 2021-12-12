@@ -7,11 +7,26 @@ import {
   FeatureGroup
 } from 'react-leaflet';
 import aqiGradeRGB from '../helpers/AQI';
+import './aqi.css';
 
 import React, { useState, useEffect } from 'react';
+var all_sensors;
 //import { data } from './displayChart';
 
 //https://api.thingspeak.com/channels/1344510/feeds.json?api_key=VJ570KKB1RMDD6NU
+
+function calcAvgAQI(sensors) {
+  let sum = 0;
+  for (const sensorID in sensors) {
+    if (sensors.hasOwnProperty(sensorID)) {
+      let sensor = sensors[sensorID];
+      sum += sensor.AQI;
+    }
+  }
+ 
+  let avg = Math.round(sum / (Object.keys(sensors).length));
+  return avg;
+}
 
 function showLabelMap(sensorData) {
   const dataArray = [];
@@ -79,6 +94,7 @@ function MapView() {
           south: data.southCountySensorsData,
           rural: data.ruralTierSensorsData
         });
+        all_sensors = data.schmidtSensorsData;
         setIsLoaded(true);
       } catch (err) { 
         setError(true);
@@ -96,32 +112,97 @@ function MapView() {
     const innerBeltwaySensorsMarkers = [...showLabelMap(sensors.inner)];
     const southCountySensorsMarkers = [...showLabelMap(sensors.south)];
     const ruralTierSensorsMarkers = [...showLabelMap(sensors.rural)];
+    const avg = calcAvgAQI(all_sensors);
     return (
-      <MapContainer center={center} zoom={10} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
-        <LayersControl position='topright'>
-          <LayersControl.Overlay checked name='North'>
-            <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
-          </LayersControl.Overlay>
-          <LayersControl.Overlay checked name='Central'>
-            <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
-          </LayersControl.Overlay>
-          <LayersControl.Overlay checked name='Rural'>
-            <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
-          </LayersControl.Overlay>
-          <LayersControl.Overlay checked name='Inner'>
-            <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
-          </LayersControl.Overlay>
-          <LayersControl.Overlay checked name='South'>
-            <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
-          </LayersControl.Overlay>
-        </LayersControl>
-      </MapContainer>
+      <><><div className='absolute top-40 right-44 w-1/6'>
+        <div>
+          <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
+        </div>
+        <div
+          className='mt-3 py-4 rounded-md text-center'
+          id={aqiGradeRGB(avg)}
+        >
+          <h2>
+            {aqiGradeRGB(avg)}
+          </h2>
+        </div>
+        <div className='flex'>
+          <div className='py-1 font-medium'>0</div>
+          <div>
+            <img
+              src='/arrow.jpg'
+              alt='Double Sided Arrow' />
+          </div>
+          <div className='py-1 font-medium'>50</div>
+        </div>
+      </div></><><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+          <LayersControl position='topright'>
+            <LayersControl.Overlay checked name='North'>
+              <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
+            </LayersControl.Overlay>
+            <LayersControl.Overlay checked name='Central'>
+              <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
+            </LayersControl.Overlay>
+            <LayersControl.Overlay checked name='Rural'>
+              <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
+            </LayersControl.Overlay>
+            <LayersControl.Overlay checked name='Inner'>
+              <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
+            </LayersControl.Overlay>
+            <LayersControl.Overlay checked name='South'>
+              <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
+            </LayersControl.Overlay>
+          </LayersControl>
+        </MapContainer></></>
     );
   }
 }
+
+/*function AQIView() {
+  let avg = 0;
+  const [sensors, setSensorData] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setSensorData(all_sensors);
+    console.log('TestingBBBB', all_sensors);
+    setIsLoaded(true);
+    //avg = calcAvgAQI(sensors);
+  }, [])
+   if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <>
+        <div className='flex-col'>
+          <div>
+            <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
+          </div>
+          <div
+            className='mt-3 py-4 rounded-md text-center'
+            id={aqiGradeRGB(avg)}
+          >
+            <h2>
+              <stong>{aqiGradeRGB(avg)}</stong>
+            </h2>
+          </div>
+          <div className='flex'>
+           <div className='py-1 font-medium'>0</div>
+            <div>
+              <img
+                src='/arrow.jpg'
+                alt='Double Sided Arrow' 
+              />
+            </div>
+            <div className='py-1 font-medium'>50</div>
+          </div>
+        </div>
+      </>
+    );
+  }
+}*/
 
 export default MapView;

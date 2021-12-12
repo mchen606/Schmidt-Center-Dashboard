@@ -1,6 +1,5 @@
 import MapView from '../components/MapView.js';
 import { Fragment } from 'react';
-import AQIWidget from '../components/AQI-Widget.js';
 import WeatherWidget from '../components/Weather-Widget.js';
 
 function Map() {
@@ -16,10 +15,7 @@ function Map() {
             <MapView />
           </div>
           {/* Filters Column */}
-          <div className='flex-col px-7 w-1/4'>
-            <div className='py-4'>
-              <AQIWidget />
-            </div>
+          <div className='px-6 w-1/4 py-36'>
             <div>
               <WeatherWidget  />
             </div>
