@@ -3,7 +3,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMapEvents,
   LayersControl,
   FeatureGroup
 } from 'react-leaflet';
@@ -24,8 +23,8 @@ function calcAvgAQI(sensors) {
       sum += sensor.AQI;
     }
   }
- 
-  let avg = Math.round(sum / (Object.keys(sensors).length));
+
+  let avg = Math.round(sum / Object.keys(sensors).length);
   return avg;
 }
 
@@ -35,10 +34,7 @@ function showLabelMap(sensorData) {
     if (sensorData.hasOwnProperty(sensorKey)) {
       let sensor = sensorData[sensorKey];
       dataArray.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensorKey}
-        >
+        <Marker position={[sensor.Latitude, sensor.Longitude]} key={sensorKey}>
           <Popup>
             <div
               className='container mx-auto p-2 text-center rounded-md'
@@ -56,13 +52,10 @@ function showLabelMap(sensorData) {
           </Popup>
         </Marker>
       );
-
     }
-
   }
 
   return dataArray;
-
 }
 
 function MapView() {
@@ -97,9 +90,9 @@ function MapView() {
         });
         all_sensors = data.schmidtSensorsData;
         setIsLoaded(true);
-      } catch (err) { 
+      } catch (err) {
         setError(true);
-      } 
+      }
     };
     fetchData1();
   }, []);
@@ -115,49 +108,56 @@ function MapView() {
     const ruralTierSensorsMarkers = [...showLabelMap(sensors.rural)];
     const avg = calcAvgAQI(all_sensors);
     return (
-      <><><div className='absolute top-40 right-44 w-1/6'>
-        <div>
-          <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
-        </div>
-        <div
-          className='mt-3 py-4 rounded-md text-center'
-          id={aqiGradeRGB(avg)}
-        >
-          <h2>
-            {aqiGradeRGB(avg)}
-          </h2>
-        </div>
-        <div className='flex'>
-          <div className='py-1 font-medium'>0</div>
-          <div>
-            <img
-              src='/arrow.jpg'
-              alt='Double Sided Arrow' />
+      <>
+        <>
+          <div className='absolute top-40 right-44 w-1/6'>
+            <div>
+              <p className='text-2xl text-gray-600'>
+                <span className='font-bold'>County AQI: </span>
+                {avg}
+              </p>
+            </div>
+            <div
+              className='mt-3 py-4 rounded-md text-center'
+              id={aqiGradeRGB(avg)}
+            >
+              <h2>{aqiGradeRGB(avg)}</h2>
+            </div>
+            <div className='flex'>
+              <div className='py-1 font-medium'>0</div>
+              <div>
+                <img src='/arrow.jpg' alt='Double Sided Arrow' />
+              </div>
+              <div className='py-1 font-medium'>50</div>
+            </div>
           </div>
-          <div className='py-1 font-medium'>50</div>
-        </div>
-      </div></><><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-          <LayersControl position='topright'>
-            <LayersControl.Overlay checked name='North'>
-              <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Central'>
-              <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Rural'>
-              <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Inner'>
-              <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='South'>
-              <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-          </LayersControl>
-        </MapContainer></></>
+        </>
+        <>
+          <MapContainer center={center} zoom={10} scrollWheelZoom={true}>
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
+            <LayersControl position='topright'>
+              <LayersControl.Overlay checked name='North'>
+                <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Central'>
+                <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Rural'>
+                <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Inner'>
+                <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='South'>
+                <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+            </LayersControl>
+          </MapContainer>
+        </>
+      </>
     );
   }
 }
