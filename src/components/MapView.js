@@ -3,7 +3,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMapEvents,
   LayersControl,
   FeatureGroup
 } from 'react-leaflet';
@@ -24,8 +23,8 @@ function calcAvgAQI(sensors) {
       sum += sensor.AQI;
     }
   }
- 
-  let avg = Math.round(sum / (Object.keys(sensors).length));
+
+  let avg = Math.round(sum / Object.keys(sensors).length);
   return avg;
 }
 
@@ -35,10 +34,7 @@ function showLabelMap(sensorData) {
     if (sensorData.hasOwnProperty(sensorKey)) {
       let sensor = sensorData[sensorKey];
       dataArray.push(
-        <Marker
-          position={[sensor.Latitude, sensor.Longitude]}
-          key={sensorKey}
-        >
+        <Marker position={[sensor.Latitude, sensor.Longitude]} key={sensorKey}>
           <Popup>
             <div
               className='container mx-auto p-2 text-center rounded-md'
@@ -56,13 +52,10 @@ function showLabelMap(sensorData) {
           </Popup>
         </Marker>
       );
-
     }
-
   }
 
   return dataArray;
-
 }
 
 function MapView() {
@@ -97,9 +90,9 @@ function MapView() {
         });
         all_sensors = data.schmidtSensorsData;
         setIsLoaded(true);
-      } catch (err) { 
+      } catch (err) {
         setError(true);
-      } 
+      }
     };
     fetchData1();
   }, []);
