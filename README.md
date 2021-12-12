@@ -2,6 +2,10 @@
 
 The William Schmidt Center collaborates with the Center for Community Engagement, Environmental Justice, and Health to place air quality monitors at 25 school sites throughout Prince George's County to quantify the extent of toxic exposures and health disparities affecting Prince George's County residents. This network will use low-cost sensors to collect real-time data on particulate matter (PM) levels throughout the nine districts of Prince George's County, MD. In addition, the Schmidt Center will develop education and outreach materials so that students can collect, analyze, and interpret the data to make claims, evidence, and reasoning statements about air quality in Prince George's County.
 
+## Deployed Link
+
+https://schmidt-center-dashboard.netlify.app
+
 ## How to run locally
 
 In the project directory, run the following in order:
