@@ -115,26 +115,26 @@ function MapView() {
     const ruralTierSensorsMarkers = [...showLabelMap(sensors.rural)];
     const avg = calcAvgAQI(all_sensors);
     return (
-      <><><div className='absolute top-40 right-44 w-1/6'>
+      <><><div className='sm:absolute sm:top-40 sm:right-44 w-1/6'>
         <div>
           <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
         </div>
         <div
           className='mt-3 py-4 rounded-md text-center'
-          id={aqiGradeRGB(avg)}
+          id={aqiGradeRGB(avg)[0]}
         >
           <h2>
-            {aqiGradeRGB(avg)}
+            {aqiGradeRGB(avg)[0]}
           </h2>
         </div>
         <div className='flex'>
-          <div className='py-1 font-medium'>0</div>
+          <div className='py-1 font-medium'>{aqiGradeRGB(avg)[1]}</div>
           <div>
             <img
               src='/arrow.jpg'
               alt='Double Sided Arrow' />
           </div>
-          <div className='py-1 font-medium'>50</div>
+          <div className='py-1 font-medium'>{aqiGradeRGB(avg)[2]}</div>
         </div>
       </div></><><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
           <TileLayer
