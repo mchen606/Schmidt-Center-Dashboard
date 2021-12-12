@@ -38,7 +38,7 @@ function showLabelMap(sensorData) {
           <Popup>
             <div
               className='container mx-auto p-2 text-center rounded-md'
-              id={aqiGradeRGB(sensor.AQI)}
+              id={aqiGradeRGB(sensor.AQI)[0]}
               key={sensorKey}
             >
               <h1 className='font-sans font-bold '>Label: {sensor.Label}</h1>
@@ -121,13 +121,13 @@ function MapView() {
           </h2>
         </div>
         <div className='flex'>
-          <div className='py-1 font-medium'>{aqiGradeRGB(avg)[1]}</div>
+          <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[1]}</div>
           <div>
             <img
               src='/arrow.jpg'
               alt='Double Sided Arrow' />
           </div>
-          <div className='py-1 font-medium'>{aqiGradeRGB(avg)[2]}</div>
+          <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[2]}</div>
         </div>
       </div></><><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
           <TileLayer

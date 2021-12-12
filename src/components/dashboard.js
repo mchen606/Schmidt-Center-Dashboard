@@ -55,7 +55,7 @@ export function HandleInputForm() {
             <b>Enter sensor ID and date range:</b>
           </h2>
           <div className='user-input'>
-            <label htmlFor='sensor-id'> Sensor ID: </label>
+            <label htmlFor='sensor-id' style={{'margin-right':'142px'}}> Sensor ID: </label>
             <input
               type='number'
               id='sensor-id'
@@ -67,7 +67,7 @@ export function HandleInputForm() {
             ></input>
           </div>
           <div className='user-input'>
-            <label htmlFor='start-date'> Start Date: </label>
+            <label htmlFor='start-date' style={{'margin-right':'138px'}}> Start Date: </label>
             <input
               type='date'
               id='start-date'
@@ -77,8 +77,8 @@ export function HandleInputForm() {
               required
             ></input>
           </div>
-          <div className='user-input'>
-            <label htmlFor='end-date'> End Date: </label>
+          <div className='user-input'> 
+            <label htmlFor='end-date' style={{'margin-right':'144px'}}> End Date: </label>
             <input
               type='date'
               id='end-date'
@@ -89,7 +89,7 @@ export function HandleInputForm() {
             ></input>
           </div>
           <h2>
-            <b>Choose a feature to compare:</b>
+            <b>Choose features to compare and graph:</b>
           </h2>
           <p>(Default: Temperature and AQI)</p>
           <div className='user-input'>
@@ -100,7 +100,7 @@ export function HandleInputForm() {
               value={inputs.temperature}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='temperature'>Temperature</label>
+            <span htmlFor='temperature' className='ml-2'>Temperature</span>
           </div>
           <div className='user-input'>
             <input
@@ -110,7 +110,7 @@ export function HandleInputForm() {
               value={inputs.humidity}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='humidity'>Humidity</label>
+            <span htmlFor='humidity' className='ml-2'>Humidity</span>
           </div>
           <div className='user-input'>
             <input
@@ -120,7 +120,7 @@ export function HandleInputForm() {
               value={inputs.aqi}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='AQI'>AQI (Air Quality Index)</label>
+            <span htmlFor='AQI' className='ml-2'>AQI (Air Quality Index)</span>
           </div>
           <div className='user-input'>
             <input
@@ -130,9 +130,9 @@ export function HandleInputForm() {
               value={inputs.pm_1}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='pm_1_0'>
+            <span htmlFor='pm_1_0' className='ml-2'>
               PM_1.0 (Atmospheric Particulate Matter: 1.0 micrometers or less)
-            </label>
+            </span>
           </div>
           <div className='user-input'>
             <input
@@ -142,9 +142,9 @@ export function HandleInputForm() {
               value={inputs.pm_25}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='pm_2_5'>
+            <span htmlFor='pm_2_5' className='ml-2'>
               PM_2.5 (Atmospheric Particulate Matter: 2.5 micrometers or less)
-            </label>
+            </span>
           </div>
           <div className='user-input'>
             <input
@@ -154,13 +154,19 @@ export function HandleInputForm() {
               value={inputs.pm_10}
               onChange={handleCheckboxChange}
             ></input>
-            <label htmlFor='pm_10_0'>
+            <span htmlFor='pm_10_0' className='ml-2'>
               PM_10.0 (Atmospheric Particulate Matter: 10 micrometers or less)
-            </label>
+            </span>
           </div>
 
           <div className='user-input'>
-            <input type='submit' value='Submit' id='submit'></input>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 mt-3 rounded"
+              type='submit'
+              value='Submit'
+              id='submit'
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>

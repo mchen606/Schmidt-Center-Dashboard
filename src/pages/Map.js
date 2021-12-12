@@ -11,7 +11,7 @@ function Map() {
       <main>
         <div className='max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex'>
           {/* Map Column*/}
-          <div className='px-4 sm:px-0 w-3/4'>
+          <div className='px-4 sm:px-0 w-3/4'> 
             <MapView />
           </div>
           {/* Filters Column */}

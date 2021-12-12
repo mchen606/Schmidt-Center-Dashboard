@@ -11,13 +11,13 @@ div.user-input {
   display: table-row;
 }
 
-label,
 input {
   display: table-cell;
   margin-bottom: 10px;
   margin-left: 10px;
 }
 
-label {
+/*label {
   padding-right: 10px;
 }
+*/
