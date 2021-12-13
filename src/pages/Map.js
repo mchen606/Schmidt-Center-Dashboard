@@ -9,16 +9,10 @@ function Map() {
       <h1 className='text-3xl font-bold text-gray-600 max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>Air Quality Map</h1>   
       </header>
       <main>
-        <div className='max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 flex'>
+        <div className='max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8'>
           {/* Map Column*/}
-          <div className='px-4 sm:px-0 w-3/4'> 
+          <div> 
             <MapView />
-          </div>
-          {/* Filters Column */}
-          <div className='px-6 w-1/4 py-36'>
-            <div>
-              <WeatherWidget  />
-            </div>
           </div>
           {/* /End replace */}
         </div>

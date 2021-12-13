@@ -3,11 +3,11 @@
   height: 75vh;
 }
 
-form.user-inputs {
+/*form.user-inputs {
   display: table;
 }
-
-div.user-input {
+*/
+/*div.user-input {
   display: table-row;
 }
 
@@ -15,7 +15,7 @@ input {
   display: table-cell;
   margin-bottom: 10px;
   margin-left: 10px;
-}
+}*/
 
 /*label {
   padding-right: 10px;
