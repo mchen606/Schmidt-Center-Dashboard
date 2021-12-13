@@ -257,7 +257,7 @@ export default function HandleInputForm () {
             </span>
           </div>
           </div>
-            <br></br><p>Display the graph for the selections</p>
+            <br></br><p><b>Display the graph for the selections</b></p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
               type='submit'
               value='Submit'
