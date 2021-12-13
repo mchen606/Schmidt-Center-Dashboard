@@ -10,6 +10,7 @@ import aqiGradeRGB from '../helpers/AQI';
 import './aqi.css';
 
 import React, { useState, useEffect } from 'react';
+import WeatherWidget from '../components/Weather-Widget.js';
 var all_sensors;
 //import { data } from './displayChart';
 
@@ -108,49 +109,55 @@ function MapView() {
     const ruralTierSensorsMarkers = [...showLabelMap(sensors.rural)];
     const avg = calcAvgAQI(all_sensors);
     return (
-      <><><div className='sm:absolute sm:top-40 sm:right-44 w-1/6'>
-        <div>
-          <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
-        </div>
-        <div
-          className='mt-3 py-4 rounded-md text-center'
-          id={aqiGradeRGB(avg)[0]}
-        >
-          <h2>
-            {aqiGradeRGB(avg)[0]}
-          </h2>
-        </div>
-        <div className='flex'>
-          <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[1]}</div>
-          <div>
-            <img
-              src='/arrow.jpg'
-              alt='Double Sided Arrow' />
+      <div className='grid grid-cols-3'>
+        <div className='col-span-2 pr-4'><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
+            <LayersControl position='topright'>
+              <LayersControl.Overlay checked name='North'>
+                <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Central'>
+                <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Rural'>
+                <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='Inner'>
+                <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+              <LayersControl.Overlay checked name='South'>
+                <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
+              </LayersControl.Overlay>
+            </LayersControl>
+          </MapContainer></div>
+          <div className='w-1/2'>
+            <div>
+              <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
+            </div>
+            <div
+              className='mt-3 py-4 rounded-md text-center'
+              id={aqiGradeRGB(avg)[0]}
+            >
+              <h2>
+                {aqiGradeRGB(avg)[0]}
+              </h2>
+            </div>
+            <div className='flex'>
+              <div className='font-medium text-gray-600'>{aqiGradeRGB(avg)[1]}</div>
+              <div>
+                <img
+                  src='/arrow.jpg'
+                  alt='Double Sided Arrow' />
+              </div>
+              <div className='font-medium text-gray-600'>{aqiGradeRGB(avg)[2]}</div>
+            </div>
+            <div className='col-start-2 col-end-3 mt-4'>
+              <WeatherWidget />
+            </div>
           </div>
-          <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[2]}</div>
         </div>
-      </div></><><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
-          <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
-          <LayersControl position='topright'>
-            <LayersControl.Overlay checked name='North'>
-              <FeatureGroup>{northCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Central'>
-              <FeatureGroup>{centralCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Rural'>
-              <FeatureGroup>{ruralTierSensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='Inner'>
-              <FeatureGroup>{innerBeltwaySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-            <LayersControl.Overlay checked name='South'>
-              <FeatureGroup>{southCountySensorsMarkers}</FeatureGroup>
-            </LayersControl.Overlay>
-          </LayersControl>
-        </MapContainer></></>
     );
   }
 }
