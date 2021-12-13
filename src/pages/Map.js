@@ -1,6 +1,6 @@
 import MapView from '../components/MapView.js';
 import { Fragment } from 'react';
-import WeatherWidget from '../components/Weather-Widget.js';
+//import WeatherWidget from '../components/Weather-Widget.js';
 
 function Map() {
   return ( 
