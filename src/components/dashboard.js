@@ -175,7 +175,7 @@ export default function HandleInputForm () {
             >
               {Parser(result)}
             </select><br></br>
-            <h2 className='text-blue-600 mb-2'>
+            <br></br><h2 className='text-blue-600 mb-2'>
               <b>Select Compare Dates:</b>
             </h2>
             <label htmlFor='start-date' className='pr-2 font-medium'> Start Date: </label>
@@ -198,7 +198,7 @@ export default function HandleInputForm () {
             ></input>
           </div>
           <div>
-          <h2 className='text-blue-600 mb-2'>
+          <br></br><h2 className='text-blue-600 mb-2'>
             <b>Choose features to compare and graph:</b>
           </h2>
             <input
@@ -257,12 +257,13 @@ export default function HandleInputForm () {
             </span>
           </div>
           </div>
+            <br></br><p>Display the graph for the selections</p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
               type='submit'
               value='Submit'
               id='submit'
             >
-              Submit
+              Graph
             </button>
         </form>
       </div>
