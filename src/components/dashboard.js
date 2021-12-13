@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import React, { useEffect, useState } from 'react';
-import Parser from "react-html-parser";
+import Parser from "html-react-parser";
 
 const displayChart = require('./displayChart');
 

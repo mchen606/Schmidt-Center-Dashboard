@@ -13,6 +13,7 @@
     "autoprefixer": "^9",
     "chart.js": "^3.6.2",
     "faker": "^5.5.3",
+    "html-react-parser": "^1.4.2",
     "leaflet": "^1.7.1",
     "netlify-cli": "^8.0.20",
     "node-fetch": "^2.6.6",
