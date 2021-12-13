@@ -147,12 +147,12 @@ export default function HandleInputForm () {
           method='post'
           name='user-input'
         >
-        <div className='grid grid-cols-2 gap-4'>
+        <div className='grid grid-cols-2'>
         <div>
           <h2 className='text-blue-600 mb-2'>
             <b>Select sensor ID and date range:</b>
           </h2>
-            <label htmlFor='sensor-id' className='pr-2'> Sensor ID: </label>
+            <label htmlFor='sensor-id' className='pr-2 font-medium'> Sensor ID: </label>
             <select
               type='number'
               id='sensor-id'
@@ -164,7 +164,7 @@ export default function HandleInputForm () {
             >
               {Parser(result )}
             </select><br></br>
-            <label htmlFor='sensor-id2' className='pr-2'> Second Sensor ID (optional): </label>
+            <label htmlFor='sensor-id2' className='pr-2 font-medium'> Second Sensor ID (optional): </label>
             <select
               type='number'
               id='sensor-id2'
@@ -173,9 +173,9 @@ export default function HandleInputForm () {
               value={inputs.sensorid2}
               onChange={handleChange}
             >
-              {Parser(result )}
+              {Parser(result)}
             </select><br></br>
-            <label htmlFor='start-date' className='pr-2'> Start Date: </label>
+            <label htmlFor='start-date' className='pr-2 font-medium'> Start Date: </label>
             <input
               type='date'
               id='start-date'
@@ -184,7 +184,7 @@ export default function HandleInputForm () {
               onChange={handleChange}
               required
             ></input><br></br>
-            <label htmlFor='end-date' className='pr-3.5'> End Date: </label>
+            <label htmlFor='end-date' className='pr-3.5 font-medium'> End Date: </label>
             <input
               type='date'
               id='end-date'
