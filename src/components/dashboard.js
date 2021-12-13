@@ -94,7 +94,6 @@ export default function HandleInputForm () {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(JSON.stringify(inputs));
     const rootElement = document.getElementById('chart-display');
     const Display = () => displayChart.ShowChart(inputs);
     render(<Display />, rootElement);
