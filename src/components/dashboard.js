@@ -150,7 +150,7 @@ export default function HandleInputForm () {
         <div className='grid grid-cols-2'>
         <div>
           <h2 className='text-blue-600 mb-2'>
-            <b>Select sensor ID and date range:</b>
+            <b>Select Sensor:</b>
           </h2>
             <label htmlFor='sensor-id' className='pr-2 font-medium'> Sensor ID: </label>
             <select
@@ -175,6 +175,9 @@ export default function HandleInputForm () {
             >
               {Parser(result)}
             </select><br></br>
+            <h2 className='text-blue-600 mb-2'>
+              <b>Select Compare Dates:</b>
+            </h2>
             <label htmlFor='start-date' className='pr-2 font-medium'> Start Date: </label>
             <input
               type='date'
