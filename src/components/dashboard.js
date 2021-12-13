@@ -147,11 +147,12 @@ export default function HandleInputForm () {
           method='post'
           name='user-input'
         >
-          <h2>
+        <div className='grid grid-cols-2 gap-4'>
+        <div>
+          <h2 className='text-blue-600 mb-2'>
             <b>Select sensor ID and date range:</b>
           </h2>
-          <div className='user-input'>
-            <label htmlFor='sensor-id' style={{'margin-right':'142px'}}> Sensor ID: </label>
+            <label htmlFor='sensor-id' className='pr-2'> Sensor ID: </label>
             <select
               type='number'
               id='sensor-id'
@@ -162,10 +163,8 @@ export default function HandleInputForm () {
               required
             >
               {Parser(result )}
-            </select>
-          </div>
-          <div className='user-input'>
-            <label htmlFor='sensor-id2'> Second Sensor ID (optional): </label>
+            </select><br></br>
+            <label htmlFor='sensor-id2' className='pr-2'> Second Sensor ID (optional): </label>
             <select
               type='number'
               id='sensor-id2'
@@ -175,10 +174,8 @@ export default function HandleInputForm () {
               onChange={handleChange}
             >
               {Parser(result )}
-            </select>
-          </div>
-          <div className='user-input'>
-            <label htmlFor='start-date' style={{'margin-right':'138px'}}> Start Date: </label>
+            </select><br></br>
+            <label htmlFor='start-date' className='pr-2'> Start Date: </label>
             <input
               type='date'
               id='start-date'
@@ -186,10 +183,8 @@ export default function HandleInputForm () {
               value={inputs.startdate}
               onChange={handleChange}
               required
-            ></input>
-          </div>
-          <div className='user-input'> 
-            <label htmlFor='end-date' style={{'margin-right':'144px'}}> End Date: </label>
+            ></input><br></br>
+            <label htmlFor='end-date' className='pr-3.5'> End Date: </label>
             <input
               type='date'
               id='end-date'
@@ -199,10 +194,10 @@ export default function HandleInputForm () {
               required
             ></input>
           </div>
-          <h2>
+          <div>
+          <h2 className='text-blue-600 mb-2'>
             <b>Choose features to compare and graph:</b>
           </h2>
-          <div className='user-input'>
             <input
               type='checkbox'
               id='temperature'
@@ -210,9 +205,7 @@ export default function HandleInputForm () {
               value={inputs.temperature}
               onChange={handleCheckboxChange}
             ></input>
-            <span htmlFor='temperature' className='ml-2'>Temperature</span>
-          </div>
-          <div className='user-input'>
+            <span htmlFor='temperature' className='ml-2'>Temperature</span><br></br>
             <input
               type='checkbox'
               id='humidity'
@@ -220,9 +213,7 @@ export default function HandleInputForm () {
               value={inputs.humidity}
               onChange={handleCheckboxChange}
             ></input>
-            <span htmlFor='humidity' className='ml-2'>Humidity</span>
-          </div>
-          <div className='user-input'>
+            <span htmlFor='humidity' className='ml-2'>Humidity</span><br></br>
             <input
               type='checkbox'
               id='aqi'
@@ -230,9 +221,7 @@ export default function HandleInputForm () {
               value={inputs.aqi}
               onChange={handleCheckboxChange}
             ></input>
-            <span htmlFor='AQI' className='ml-2'>AQI (Air Quality Index)</span>
-          </div>
-          <div className='user-input'>
+            <span htmlFor='AQI' className='ml-2'>AQI (Air Quality Index)</span><br></br>
             <input
               type='checkbox'
               id='pm_1'
@@ -242,9 +231,7 @@ export default function HandleInputForm () {
             ></input>
             <span htmlFor='pm_1_0' className='ml-2'>
               PM_1.0 (Atmospheric Particulate Matter: 1.0 micrometers or less)
-            </span>
-          </div>
-          <div className='user-input'>
+            </span><br></br>
             <input
               type='checkbox'
               id='pm_25'
@@ -254,9 +241,7 @@ export default function HandleInputForm () {
             ></input>
             <span htmlFor='pm_2_5' className='ml-2'>
               PM_2.5 (Atmospheric Particulate Matter: 2.5 micrometers or less)
-            </span>
-          </div>
-          <div className='user-input'>
+            </span><br></br>
             <input
               type='checkbox'
               id='pm_10'
@@ -268,16 +253,14 @@ export default function HandleInputForm () {
               PM_10.0 (Atmospheric Particulate Matter: 10 micrometers or less)
             </span>
           </div>
-
-          <div className='user-input'>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 mt-3 rounded"
+          </div>
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
               type='submit'
               value='Submit'
               id='submit'
             >
               Submit
             </button>
-          </div>
         </form>
       </div>
       <div className='chart-display' id='chart-display'></div>

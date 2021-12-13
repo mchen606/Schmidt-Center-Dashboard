@@ -110,7 +110,7 @@ function MapView() {
     const avg = calcAvgAQI(all_sensors);
     return (
       <div className='grid grid-cols-3'>
-        <div className='col-span-2 pr-4'><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
+        <div className='col-span-2 pr-6'><MapContainer center={center} zoom={10} scrollWheelZoom={true}>
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' />
@@ -132,7 +132,7 @@ function MapView() {
               </LayersControl.Overlay>
             </LayersControl>
           </MapContainer></div>
-          <div className='w-1/2'>
+          <div className='w-3/5'>
             <div>
               <p className='text-2xl text-gray-600'><span className='font-bold'>County AQI: </span>{avg}</p>
             </div>
@@ -145,13 +145,13 @@ function MapView() {
               </h2>
             </div>
             <div className='flex'>
-              <div className='font-medium text-gray-600'>{aqiGradeRGB(avg)[1]}</div>
+              <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[1]}</div>
               <div>
                 <img
                   src='/arrow.jpg'
                   alt='Double Sided Arrow' />
               </div>
-              <div className='font-medium text-gray-600'>{aqiGradeRGB(avg)[2]}</div>
+              <div className='py-1 font-medium text-gray-600'>{aqiGradeRGB(avg)[2]}</div>
             </div>
             <div className='col-start-2 col-end-3 mt-4'>
               <WeatherWidget />
