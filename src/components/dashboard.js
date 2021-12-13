@@ -183,17 +183,17 @@ export default function HandleInputForm () {
             </h2>
             <label htmlFor='start-date' className='pr-2 font-medium'> Start: </label>
             <input
-              type='date'
+              type='datetime-local'
               id='start-date'
               name='startdate'
-              placeholder='Start Date'
               value={inputs.startdate}
               onChange={handleChange}
               required
             ></input>
+            <br/>
             <label htmlFor='end-date' className='pr-3.5 font-medium'> End: </label>
             <input
-              type='date'
+              type='datetime-local'
               id='end-date'
               name='enddate'
               value={inputs.enddate}
