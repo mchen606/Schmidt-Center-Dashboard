@@ -7,6 +7,10 @@ function DashBoard() {
         <header className="bg-white shadow">
           <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-gray-600">Dashboard</h1>
+            <p>
+              Display timeline data for a single sensor or compare features for two sensors.
+              <br/>Start by selecting a sensor, date range, and a feature to graph
+            </p>
           </div>
         </header>
         <main>

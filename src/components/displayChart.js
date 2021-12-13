@@ -13,25 +13,44 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-// import faker from 'faker';
-// import { render } from "react-dom";
+
 
 var thingspeakHandler = require('./dataHandler');
 
-const labels = [];
-const pm_1_atms = [];
-const temperatures = [];
-const humidities = [];
-const aqis = [];
-const pm_2_5_atms = [];
-const pm_10_atms = [];
-const aqi_descriptions = [];
+const labels = {};
+const pm_1_atms = {};
+const temperatures = {};
+const humidities = {};
+const aqis = {};
+const pm_2_5_atms = {};
+const pm_10_atms = {};
+const aqi_descriptions = {};
 
+/**
+ * 
+ * @param {*} inputs 
+ */
 export async function chartData(inputs){
 
-    const sensorids = [inputs.sensorid];
+    let sensorids = [inputs.sensorid];
+    if(inputs.sensorid2){
+        sensorids.push(inputs.sensorid2);
+    }
     const startdate = inputs.startdate;
     const enddate = inputs.enddate;
+    // Initialize
+    sensorids.forEach(sensor => {
+        if(sensor !== ""){
+            labels[sensor] = [];
+            pm_1_atms[sensor] = [];
+            temperatures[sensor] = [];
+            humidities[sensor] = [];
+            aqis[sensor] = [];
+            pm_2_5_atms[sensor] = [];
+            pm_10_atms[sensor] = [];
+            aqi_descriptions[sensor] = [];
+        }
+    })
 
     console.log("received id:"+ sensorids)
     const data = await thingspeakHandler.getThingspeakProcessedData(sensorids, startdate, enddate);
@@ -40,17 +59,17 @@ export async function chartData(inputs){
         console.log("Feed of:" + element.sensor_ID + "Feeds:" + element.feeds);
 
         element.feeds.forEach(feed => {
-            labels.push(feed.created_at);
-            temperatures.push(feed.Temperature);
-            humidities.push(feed.Humidity);
-            aqis.push(feed.AQI);
-            pm_2_5_atms.push(feed.PM25ATM);
-            pm_10_atms.push(feed.PM100ATM);
-            pm_1_atms.push(feed.PM10ATM);
-            aqi_descriptions.push(feed.AQIDescription);
+            labels[element.sensor_ID].push(feed.created_at);
+            temperatures[element.sensor_ID].push(feed.Temperature);
+            humidities[element.sensor_ID].push(feed.Humidity);
+            aqis[element.sensor_ID].push(feed.AQI);
+            pm_2_5_atms[element.sensor_ID].push(feed.PM25ATM);
+            pm_10_atms[element.sensor_ID].push(feed.PM100ATM);
+            pm_1_atms[element.sensor_ID].push(feed.PM10ATM);
+            aqi_descriptions[element.sensor_ID].push(feed.AQIDescription);
         });
 
-        console.log("Humidities" + humidities)
+        console.log("Humidities" + JSON.stringify(humidities))
         
     });
     
@@ -66,6 +85,9 @@ ChartJS.register(
   Legend
 );
 
+/**
+ * 
+ */
 export const options = {
   responsive: true,
   plugins: {
@@ -74,26 +96,66 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Chart.js Data Chart',
+      text: 'Sensor Data Data Chart',
     },
   },
 };
 
-//const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+/**
+ * 
+ */
+export const options2 = {
+    responsive: true,
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
+    stacked: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Sensor Data Line Chart - Multi Axis',
+      },
+    },
+    scales: {
+      y: {
+        type: 'linear',
+        display: true,
+        position: 'left',
+      },
+      y1: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        grid: {
+          drawOnChartArea: false,
+        },
+      },
+    },
+}
 
+/**
+ * 
+ * @param {*} inputs 
+ * @returns 
+ */
 export const data = (inputs) => {
     const data = {
-        labels,
+        labels: labels[inputs.sensorid],
         datasets: [] 
     };
 
+    
+    const sensor = inputs.sensorid;
+    let label = 'Primary Sensor ';
+        // Sensor Temperature data
     if(inputs.temperature) {
         const color = getColor();
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'Temperature',
-                data: temperatures,
+                label: label.concat('Temperature'),
+                data: temperatures[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
             }
@@ -105,10 +167,11 @@ export const data = (inputs) => {
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'Humidity',
-                data: humidities,
+                label: label.concat('Humidity'),
+                data: humidities[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
+                
             }
         )
     }
@@ -118,10 +181,11 @@ export const data = (inputs) => {
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'AQI (Air Quality Index)',
-                data: aqis,
+                label: label.concat('AQI (Air Quality Index)'),
+                data: aqis[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
+                
             }
         )
     }
@@ -131,10 +195,11 @@ export const data = (inputs) => {
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'PM 2.5 ATM',
-                data: pm_2_5_atms,
+                label: label.concat('PM 2.5 ATM'),
+                data: pm_2_5_atms[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
+                
             }
         )
     }
@@ -144,10 +209,11 @@ export const data = (inputs) => {
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'PM 1.0 ATM',
-                data: pm_1_atms,
+                label: label.concat('PM 1.0 ATM'),
+                data: pm_1_atms[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
+                
             }
         )
     }
@@ -157,43 +223,139 @@ export const data = (inputs) => {
         const backgroundColor = getBackgroundColor(color);
         data.datasets.push(
             {
-                label: 'PM 10 ATM',
-                data: pm_10_atms,
+                label: label.concat('PM 10 ATM'),
+                data: pm_10_atms[sensor],
                 borderColor: color,
                 backgroundColor: backgroundColor,
             }
         )
     }
 
+    return data;
+
+}
+
+/**
+ * 
+ * @param {*} inputs 
+ * @returns 
+ */
+export const data2 = (inputs) => {
+    const data = {
+        labels: labels[inputs.sensorid],
+        datasets: [] 
+    };
+
+
+    const sensorids = [inputs.sensorid, inputs.sensorid2];
+    sensorids.forEach(sensor => {
+        let label = '';
+        let yaxis = '';
+        if(sensor === inputs.sensorid){
+            label = 'Primary Sensor ';
+            yaxis = 'y';
+        }else{
+            label = 'Secondary Sensor ';
+            yaxis = 'y1';
+        }
+        // Sensor Temperature data
+        if(inputs.temperature) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('Temperature'),
+                    data: temperatures[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        if(inputs.humidity) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('Humidity'),
+                    data: humidities[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        if(inputs.aqi) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('AQI (Air Quality Index)'),
+                    data: aqis[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        if(inputs.pm_25) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('PM 2.5 ATM'),
+                    data: pm_2_5_atms[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        if(inputs.pm_1) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('PM 1.0 ATM'),
+                    data: pm_1_atms[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        if(inputs.pm_10) {
+            const color = getColor();
+            const backgroundColor = getBackgroundColor(color);
+            data.datasets.push(
+                {
+                    label: label.concat('PM 10 ATM'),
+                    data: pm_10_atms[sensor],
+                    borderColor: color,
+                    backgroundColor: backgroundColor,
+                    yAxisID: yaxis,
+                }
+            )
+        }
+
+        
+
+    });
 
     return data;
 
 }
 
-// export const data = {
-//   labels,
-//   datasets: [
-//     {
-//       label: 'Temperature',
-//       data: temperatures, //labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-//       borderColor: 'rgb(255, 99, 132)',
-//       backgroundColor: 'rgba(255, 99, 132, 0.5)',
-//     },
-//     {
-//       label: 'AQI',
-//       data: aqis, //labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-//       borderColor: 'rgb(53, 162, 235)',
-//       backgroundColor: 'rgba(53, 162, 235, 0.5)',
-//     },
-//   ],
-// };
-
-export function Test() {
-   return <Line options={options} data={data} />;
-}
-
-
-
+/**
+ * 
+ * @param {*} inputs 
+ * @returns 
+ */
 export function ShowChart(inputs){
 
     console.log("Here we are");
@@ -228,6 +390,14 @@ export function ShowChart(inputs){
 
     } else {
 
+        if(inputs.sensorid2 !== ""){
+            return (
+                <div>
+                    <Line options={options2} data={data2(inputs)} />
+                </div>
+            );
+        }
+
         return (
             <div>
                 <Line options={options} data={data(inputs)} />
@@ -238,6 +408,10 @@ export function ShowChart(inputs){
 
 }
 
+/**
+ * 
+ * @returns 
+ */
 function getColor() {
 
     var o = Math.round, r = Math.random, s = 255;
@@ -245,6 +419,11 @@ function getColor() {
 
 }
 
+/**
+ * 
+ * @param {*} color 
+ * @returns 
+ */
 function getBackgroundColor(color){
     return (color.replace(')', '').replace('rgb', 'rgba') + ',0.5)');
 }

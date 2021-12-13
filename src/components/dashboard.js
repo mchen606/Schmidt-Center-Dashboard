@@ -141,9 +141,6 @@ export default function HandleInputForm () {
   return (
     <div>
       <div>
-        <p><strong>Select a sensor, dates, and features to visualize timeline data</strong></p>
-      </div>
-      <div>
         <form
           onSubmit={handleSubmit}
           className='user-inputs'
@@ -155,42 +152,46 @@ export default function HandleInputForm () {
           <h2 className='text-blue-600 mb-2'>
             <b>Select Sensor:</b>
           </h2>
-            <label htmlFor='sensor-id' className='pr-2 font-medium'> Sensor ID: </label>
             <select
               type='number'
               id='sensor-id'
               name='sensorid'
-              placeholder='Sensor ID'
+              htmlFor='sensor-id'
+              className='pr-2 font-medium'
               value={inputs.sensorid}
               onChange={handleChange}
               required
             >
+              <option value="" disabled defaultValue hidden>Primary Sensor (required)</option>
               {Parser(result )}
-            </select><br></br>
-            <label htmlFor='sensor-id2' className='pr-2 font-medium'> Second Sensor ID (optional): </label>
+            </select>
             <select
               type='number'
               id='sensor-id2'
               name='sensorid2'
-              placeholder='Second Sensor ID'
+              htmlFor='sensor-id2'
+              className='pr-2 font-medium'
               value={inputs.sensorid2}
               onChange={handleChange}
             >
+              <option value="" disabled defaultValue hidden>Second Sensor (optional)</option>
+              <option value="" >None</option>
               {Parser(result)}
-            </select><br></br>
-            <br></br><h2 className='text-blue-600 mb-2'>
+            </select>
+            <h2 className='text-blue-600 mb-2'>
               <b>Select Dates:</b>
             </h2>
-            <label htmlFor='start-date' className='pr-2 font-medium'> Start Date: </label>
+            <label htmlFor='start-date' className='pr-2 font-medium'> Start: </label>
             <input
               type='date'
               id='start-date'
               name='startdate'
+              placeholder='Start Date'
               value={inputs.startdate}
               onChange={handleChange}
               required
-            ></input><br></br>
-            <label htmlFor='end-date' className='pr-3.5 font-medium'> End Date: </label>
+            ></input>
+            <label htmlFor='end-date' className='pr-3.5 font-medium'> End: </label>
             <input
               type='date'
               id='end-date'
@@ -201,7 +202,7 @@ export default function HandleInputForm () {
             ></input>
           </div>
           <div>
-          <br></br><h2 className='text-blue-600 mb-2'>
+          <h2 className='text-blue-600 mb-2'>
             <b>Choose features to compare:</b>
           </h2>
             <input
@@ -257,16 +258,15 @@ export default function HandleInputForm () {
             ></input>
             <span htmlFor='pm_10_0' className='ml-2'>
               PM_10.0 (Atmospheric Particulate Matter: 10 micrometers or less)
-            </span>
+            </span><br></br>
           </div>
           </div>
-            <br></br><p><b>Display the graph for the selections</b></p>
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
               type='submit'
               value='Submit'
               id='submit'
             >
-              Graph
+              Display Graph
             </button>
         </form>
       </div>
