@@ -141,6 +141,9 @@ export default function HandleInputForm () {
   return (
     <div>
       <div>
+        <p><strong>Select a sensor, dates, and features to visualize timeline data</strong></p>
+      </div>
+      <div>
         <form
           onSubmit={handleSubmit}
           className='user-inputs'
@@ -176,7 +179,7 @@ export default function HandleInputForm () {
               {Parser(result)}
             </select><br></br>
             <br></br><h2 className='text-blue-600 mb-2'>
-              <b>Select Compare Dates:</b>
+              <b>Select Dates:</b>
             </h2>
             <label htmlFor='start-date' className='pr-2 font-medium'> Start Date: </label>
             <input
@@ -199,7 +202,7 @@ export default function HandleInputForm () {
           </div>
           <div>
           <br></br><h2 className='text-blue-600 mb-2'>
-            <b>Choose features to compare and graph:</b>
+            <b>Choose features to compare:</b>
           </h2>
             <input
               type='checkbox'
