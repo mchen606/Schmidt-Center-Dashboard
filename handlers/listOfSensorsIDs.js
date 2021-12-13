@@ -1,5 +1,6 @@
 
 // List of the sensors
+//let sensorIDs = [];
 // let sensorIDs = [
 
 //     102898, // PGCPS_Schmidt_CenterBldg (outside) ID 102898
@@ -108,20 +109,20 @@ exports.getSensorsLists = function () {
 // }
 
 // List of the sensors ids
-const sensorIDs = function() {
+const sensorIDsList = function() {
 
     const sensorIDslist = [];
     for(let key in sensorIdsLabel){
 
         if(sensorIdsLabel.hasOwnProperty(key)){
-            sensorIDslist.push(key)
+            sensorIDslist.push(parseInt(key))
         }
     }
     return sensorIDslist;
 }
 
-exports.getSensorsIDs = function () {
-    return [...sensorIDs];
+exports.getSensorsIDs = function(){
+    return sensorIDsList();
 }
 
 const getsensorIDsbyregion = function(region) {
@@ -131,7 +132,7 @@ const getsensorIDsbyregion = function(region) {
 
         if(sensorIdsLabel.hasOwnProperty(key)){
             if(sensorIdsLabel[key].Region === region){
-                sensorIDslist.push(key)
+                sensorIDslist.push(parseInt(key))
             }
         }
     }
