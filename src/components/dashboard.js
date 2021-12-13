@@ -1,13 +1,71 @@
-import { useState } from 'react';
 import { render } from 'react-dom';
+import React, { useEffect, useState } from 'react';
+import Parser from "react-html-parser";
 
 const displayChart = require('./displayChart');
 
-export function HandleInputForm() {
+//const dropdata = [];
+
+const dropdownlist = async() => {
+
+  let select = "";
+  let north = "<optgroup label='North County'>";
+  let south = "<optgroup label='South County'>";
+  let central = "<optgroup label='Central County'>";
+  let rural = "<optgroup label='Rural Tier'>";
+  let inner = "<optgroup label='Inner Beltsway'>";
+  //const [sensoridlists, setSensoridlists] = useState(null);
+
+  try{
+    let data = await fetch('/.netlify/functions/allSensorsIDs');
+    //data = data.json();
+    const sensoridlists = await data.json();
+    //setSensoridlists(data);
+    console.log("ID Lists: " + sensoridlists)
+    for(let key in sensoridlists){
+      if(sensoridlists.hasOwnProperty(key)){
+          if(sensoridlists[key].Region === "North County"){
+            north += `<option value=${key}>${sensoridlists[key].Name} Status: ${sensoridlists[key].Status}</option>`
+          }
+          if(sensoridlists[key].Region === "South County"){
+            south += `<option value=${key}>${sensoridlists[key].Name} Status: ${sensoridlists[key].Status}</option>`
+          }
+          if(sensoridlists[key].Region === "Central County"){
+            central += `<option value=${key}>${sensoridlists[key].Name} Status: ${sensoridlists[key].Status}</option>`
+          }
+          if(sensoridlists[key].Region === "rural County"){
+            rural += `<option value=${key}>${sensoridlists[key].Name} Status: ${sensoridlists[key].Status}</option>`
+          }
+          if(sensoridlists[key].Region === "Inner Beltsway"){
+            inner += `<option value=${key}>${sensoridlists[key].Name} Status: ${sensoridlists[key].Status}</option>`
+          }
+      }
+    }
+
+  }catch(err)
+  {
+    console.log(err.message);
+  }
+
+  north += "</optgroup>";
+  south += "</optgroup>";
+  central += "</optgroup>";
+  inner += "</optgroup>";
+  rural += "</optgroup>";
+
+  select = select.concat(north, south, central, rural, inner);
+  //select += "</div>";
+  //dropdata.push(select)
+
+  return select;
+}
+
+export default function HandleInputForm () {
   // const canvasObj = canvasRef.current;
   // const ctx = canvasObj.getContext('2d');
   const [inputs, setInputs] = useState({
     sensorid: '',
+    sensorid2:'',
     startdate: '',
     enddate: '',
     temperature: false,
@@ -17,6 +75,8 @@ export function HandleInputForm() {
     pm_25: false,
     pm_10: false
   });
+  const [result, setresult] = useState("");
+
 
   const handleChange = (e) => {
     setInputs((oldValues) => ({
@@ -32,15 +92,51 @@ export function HandleInputForm() {
     }));
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    alert('This was submitted: ' + JSON.stringify(inputs));
     const rootElement = document.getElementById('chart-display');
     const Display = () => displayChart.ShowChart(inputs);
     render(<Display />, rootElement);
-    //displayChart.showChart(inputs.sensorid, inputs.startdate, inputs.enddate);
-    //getRequestedData(inputs.sensorid, inputs.startdate, inputs.enddate);
   };
+
+  // const Detdropdown = () => {
+  //   //event.preventDefault();
+  //   //const rootElement = document.getElementById('sensor-id');
+  //   //let result = ["wewewe"];
+  //   useEffect(() => {
+  //     const List = async() => await dropdownlist();
+  //     List().then(data => {
+  //       setresult(data);
+  //       //result.push(data);
+  //       console.log("trfehjh: "+ result );
+  //       //return result;
+  //   });
+
+  //   })
+  //   // const List = async() => await dropdownlist();
+  //   // List().then(data => {
+  //   //   result.push(data);
+  //   //   console.log("trfehjh: "+ result );
+  //   //   return result;
+  //   // });
+  //   //delay(1000000);
+  //   console.log("Listweeed: " + result)
+  //   return result;
+  //   //render(<List />, rootElement);
+  // }
+
+  useEffect(() => {
+    const List = async() => await dropdownlist();
+    List().then(data => {
+      setresult(data);
+      //result.push(data);
+      //console.log("trfehjh: "+ result );
+      //return result;
+    }) 
+  });
+
+
+  //console.log("tr09h: "+ result );
 
   return (
     <div>
@@ -52,11 +148,11 @@ export function HandleInputForm() {
           name='user-input'
         >
           <h2>
-            <b>Enter sensor ID and date range:</b>
+            <b>Select sensor ID and date range:</b>
           </h2>
           <div className='user-input'>
             <label htmlFor='sensor-id' style={{'margin-right':'142px'}}> Sensor ID: </label>
-            <input
+            <select
               type='number'
               id='sensor-id'
               name='sensorid'
@@ -64,7 +160,22 @@ export function HandleInputForm() {
               value={inputs.sensorid}
               onChange={handleChange}
               required
-            ></input>
+            >
+              {Parser(result )}
+            </select>
+          </div>
+          <div className='user-input'>
+            <label htmlFor='sensor-id2'> Second Sensor ID (optional): </label>
+            <select
+              type='number'
+              id='sensor-id2'
+              name='sensorid2'
+              placeholder='Second Sensor ID'
+              value={inputs.sensorid2}
+              onChange={handleChange}
+            >
+              {Parser(result )}
+            </select>
           </div>
           <div className='user-input'>
             <label htmlFor='start-date' style={{'margin-right':'138px'}}> Start Date: </label>
@@ -91,7 +202,6 @@ export function HandleInputForm() {
           <h2>
             <b>Choose features to compare and graph:</b>
           </h2>
-          <p>(Default: Temperature and AQI)</p>
           <div className='user-input'>
             <input
               type='checkbox'
@@ -175,4 +285,4 @@ export function HandleInputForm() {
   );
 }
 
-export default HandleInputForm;
+//export default HandleInputForm;
