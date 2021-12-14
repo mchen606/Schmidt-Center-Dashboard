@@ -149,15 +149,15 @@ export default function HandleInputForm () {
         >
         <div className='grid grid-cols-2'>
         <div>
-          <h2 className='text-blue-600 mb-2'>
-            <b>Select Sensor:</b>
+          <h2 className='px-1 text-blue-600 mb-2'>
+            <b>Select Sensor(s):</b>
           </h2>
             <select
               type='number'
               id='sensor-id'
               name='sensorid'
               htmlFor='sensor-id'
-              className='pr-2 font-medium'
+              className='font-medium pb-1'
               value={inputs.sensorid}
               onChange={handleChange}
               required
@@ -170,7 +170,7 @@ export default function HandleInputForm () {
               id='sensor-id2'
               name='sensorid2'
               htmlFor='sensor-id2'
-              className='pr-2 font-medium'
+              className='font-medium'
               value={inputs.sensorid2}
               onChange={handleChange}
             >
@@ -178,10 +178,10 @@ export default function HandleInputForm () {
               <option value="" >None</option>
               {Parser(result)}
             </select>
-            <h2 className='text-blue-600 mb-2'>
+            <h2 className='text-blue-600 mb-2 mt-2 px-1'>
               <b>Select Dates:</b>
             </h2>
-            <label htmlFor='start-date' className='pr-2 font-medium'> Start: </label>
+            <label htmlFor='start-date' className='pr-1 px-1 font-medium'> Start: </label>
             <input
               type='datetime-local'
               id='start-date'
@@ -191,7 +191,7 @@ export default function HandleInputForm () {
               required
             ></input>
             <br/>
-            <label htmlFor='end-date' className='pr-3.5 font-medium'> End: </label>
+            <label htmlFor='end-date' className='px-1 font-medium' style={{'padding-right': '11px'}}> End: </label>
             <input
               type='datetime-local'
               id='end-date'
@@ -261,7 +261,7 @@ export default function HandleInputForm () {
             </span><br></br>
           </div>
           </div>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded"
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 mt-5 ml-1 rounded"
               type='submit'
               value='Submit'
               id='submit'
